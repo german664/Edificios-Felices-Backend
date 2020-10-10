@@ -20,6 +20,6 @@ class Development(Base):
     ENV = 'development'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # mysql+pymysql://<username>:<password>@<host_ip>:<port>/<database_name>
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:Nico2010!@localhost:3306/edificios_'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://b48ea3b8ed27a8:0b7c4f87@eu-cdbr-west-03.cleardb.net/heroku_841a994e33824ed'
     JWT_SECRET_KEY = "ba2c9a390a763c9ac2c1a1071652d21a"
     UPLOAD_FOLDER = "static"
