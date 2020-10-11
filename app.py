@@ -85,8 +85,6 @@ def register(id=None, rol_id=None):
             return jsonify({"msg": "Email es obligatorio"}), 400
         if not username:
             return jsonify({"msg": "Nombre usuario es obligatorio"}), 400
-       """  if not edificio_id:
-            return jsonify({"msg": "Edificio es obligatorio"}), 400 """
 
         user = User.query.filter_by(username=username).first()
 
