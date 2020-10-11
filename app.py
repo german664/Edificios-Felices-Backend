@@ -34,8 +34,6 @@ manager = Manager(app)
 manager.add_command("db", MigrateCommand)
 CORS(app)
 
-env = os.environ.get("PYTHON_ENV")
-
 
 @app.route("/")
 def main():
