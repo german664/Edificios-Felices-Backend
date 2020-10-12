@@ -771,6 +771,16 @@ def crearConserje(id=None):
         return jsonify({"Msg": "Conserje Actualizado"}), 200
 
 
+@app.route("/conserje/usuario/<int:id>", methods=['GET'])
+def conserje_usuario(id):
+    conserje = Conserje.query.filter_by(usuario_id=id).first()
+
+    if not conserje:
+        return jsonify({"msg": "no existe este conserje"}), 400
+
+    return jsonify(conserje.serialize()), 200
+
+
 @app.route("/conserjes/edificio/<int:id>", methods=['POST', 'GET', 'DELETE', 'PUT'])
 def conserjes_edificio(id):
     if request.method == 'GET':
