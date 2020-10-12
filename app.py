@@ -1517,7 +1517,7 @@ def dpto_usuario_paqueteria(id):
 
 @app.route("/admnistradorEdificio/<id>", methods=['GET'])
 def adm_del_edificio(id):
-    administrador = User.query.filter_by(edificio_id=id, rol_id="2").first()
+    administrador = User.query.filter_by(edificio_id=id, rol_id="11").first()
 
     if not administrador:
         return jsonify({"msg": "No hay administrador"}), 400
