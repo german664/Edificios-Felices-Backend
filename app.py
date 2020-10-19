@@ -16,7 +16,7 @@ from sendgrid.helpers.mail import *
 from libs.functions import allowed_file
 from io import TextIOWrapper
 import csv
-
+import boto3
 import time
 
 ALLOWED_EXTENSIONS_IMAGES = {'png', 'jpg', 'jpeg'}
@@ -33,6 +33,9 @@ CORS(app)
 manager = Manager(app)
 manager.add_command("db", MigrateCommand)
 CORS(app)
+
+S3_BUCKET = os.environ.get('S3_BUCKET')
+s3 = boto3.client('s3')
 
 
 @app.route("/")
@@ -719,7 +722,10 @@ def crearConserje(id=None):
         if avatar and allowed_file(avatar.filename, ALLOWED_EXTENSIONS_IMAGES):
             filename = secure_filename(avatar.filename)
             avatar.save(os.path.join(
-                app.config['UPLOAD_FOLDER']+"/avatares", filename))
+                app.config['UPLOAD_FOLDER'] + "/avatares", filename))
+            filename2 = os.path.join(
+                app.config['UPLOAD_FOLDER'] + "/avatares", filename)
+            s3.upload_file(Bucket=S3_BUCKET, Filename=filename2, Key=filename2)
 
         conserje = Conserje()
         conserje.nombre = nombre
