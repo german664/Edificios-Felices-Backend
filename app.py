@@ -722,9 +722,9 @@ def crearConserje(id=None):
         if avatar and allowed_file(avatar.filename, ALLOWED_EXTENSIONS_IMAGES):
             filename = secure_filename(avatar.filename)
             avatar.save(os.path.join(
-                app.config['UPLOAD_FOLDER'] + "/avatares", filename))
+                app.config['UPLOAD_FOLDER'] + "/avatares/", filename))
             filename2 = os.path.join(
-                app.config['UPLOAD_FOLDER'] + "/avatares", filename)
+                app.config['UPLOAD_FOLDER'] + "/avatares/", filename)
             s3.upload_file(Bucket=S3_BUCKET, Filename=filename2, Key=filename2)
 
         conserje = Conserje()
@@ -1338,6 +1338,9 @@ def gastos_comunes():
             filename = secure_filename(comprobante.filename)
             comprobante.save(os.path.join(
                 app.config['UPLOAD_FOLDER'] + "/comprobantes", filename))
+            filename2 = os.path.join(
+                app.config['UPLOAD_FOLDER'] + "/comprobantes/", filename)
+            s3.upload_file(Bucket=S3_BUCKET, Filename=filename2, Key=filename2)
 
         montos_mes = MontosTotales.query.filter_by(
             edificio_id=edificio_id, month=month, year=year).first()
@@ -1457,6 +1460,9 @@ def estado_gasto(edificio, depto, mes, year):
         filename = secure_filename(pago.filename)
         pago.save(os.path.join(
             app.config['UPLOAD_FOLDER'] + "/pagos", filename))
+        filename2 = os.path.join(
+            app.config['UPLOAD_FOLDER'] + "/pagos/", filename)
+        s3.upload_file(Bucket=S3_BUCKET, Filename=filename2, Key=filename2)
 
     gasto_comun = GastoComun.query.filter_by(
         edificio_id=edificio, departamento_id=depto, month=mes, year=year).first()
