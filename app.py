@@ -771,6 +771,10 @@ def crearConserje(id=None):
                 filename = secure_filename(avatar.filename)
                 avatar.save(os.path.join(
                     app.config['UPLOAD_FOLDER'] + "/avatares", filename))
+                filename2 = os.path.join(
+                    app.config['UPLOAD_FOLDER'] + "/avatares/", filename)
+                s3.upload_file(Bucket=S3_BUCKET,
+                               Filename=filename2, Key=filename2)
                 conserje.avatar = filename
                 conserje.update()
 
