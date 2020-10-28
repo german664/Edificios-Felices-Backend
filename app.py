@@ -745,7 +745,7 @@ def crearConserje(id=None):
         conserje.delete()
         return jsonify({"msg": "conserje borrado"}), 200
 
-    if request.method == 'PATCH':
+    if request.method == "PATCH":
         conserje = Conserje.query.filter_by(id=id).first()
 
         nombre = request.form.get("nombre", None)
